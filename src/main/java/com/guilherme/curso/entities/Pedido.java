@@ -6,7 +6,9 @@ import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "tb_pedido")
@@ -26,6 +28,9 @@ public class Pedido implements Serializable {
     @ManyToOne
     @JoinColumn(name = "cliente_id")
     private Usuario cliente;
+
+    @OneToMany(mappedBy = "id.pedido")
+    private Set<PedidoItem> items = new HashSet<>();
 
     // Construtores
     public Pedido() {
@@ -71,6 +76,10 @@ public class Pedido implements Serializable {
         if (status != null) {
             this.status = status.getCode();
         }
+    }
+
+    public Set<PedidoItem> getItems() {
+        return items;
     }
 
     // Métodos

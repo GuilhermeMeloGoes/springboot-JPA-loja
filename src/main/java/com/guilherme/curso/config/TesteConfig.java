@@ -1,14 +1,8 @@
 package com.guilherme.curso.config;
 
-import com.guilherme.curso.entities.Categoria;
-import com.guilherme.curso.entities.Pedido;
-import com.guilherme.curso.entities.Produto;
-import com.guilherme.curso.entities.Usuario;
+import com.guilherme.curso.entities.*;
 import com.guilherme.curso.entities.enums.StatusPedido;
-import com.guilherme.curso.repositories.CategoriaRepository;
-import com.guilherme.curso.repositories.PedidoRepository;
-import com.guilherme.curso.repositories.ProdutoRepository;
-import com.guilherme.curso.repositories.UsuarioRepository;
+import com.guilherme.curso.repositories.*;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -33,6 +27,9 @@ public class TesteConfig implements CommandLineRunner {
 
     @Autowired
     private ProdutoRepository produtoRepository;
+
+    @Autowired
+    private PedidoItemRepository pedidoItemRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -71,6 +68,12 @@ public class TesteConfig implements CommandLineRunner {
 
         pedidoRepository.saveAll(Arrays.asList(ped1, ped2, ped3));
 
+        PedidoItem pi1 = new PedidoItem(ped1, prod1, 2, prod1.getPreco());
+        PedidoItem pi2 = new PedidoItem(ped1, prod3, 1, prod3.getPreco());
+        PedidoItem pi3 = new PedidoItem(ped2, prod3, 2, prod3.getPreco());
+        PedidoItem pi4 = new PedidoItem(ped3, prod5, 2, prod5.getPreco());
+
+        pedidoItemRepository.saveAll(Arrays.asList(pi1, pi2, pi3, pi4));
 
     }
 }
