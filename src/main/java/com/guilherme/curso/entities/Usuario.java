@@ -1,13 +1,19 @@
 package com.guilherme.curso.entities;
 
+import jakarta.persistence.*;
+
 import java.io.Serializable;
 import java.util.Objects;
 
+@Entity
+@Table(name="tb_usuario")
 public class Usuario implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     // Atributos
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
     private String email;
