@@ -1,7 +1,7 @@
 package com.guilherme.curso.config;
 
 import com.guilherme.curso.entities.Usuario;
-import com.guilherme.curso.repositories.UsarioRepository;
+import com.guilherme.curso.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
@@ -14,7 +14,7 @@ import java.util.Arrays;
 public class TesteConfig implements CommandLineRunner {
 
     @Autowired
-    private UsarioRepository usuarioRepository;
+    private UsuarioRepository usuarioRepository;
 
 
     @Override
