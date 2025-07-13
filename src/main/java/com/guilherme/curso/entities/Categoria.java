@@ -1,5 +1,6 @@
 package com.guilherme.curso.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -9,7 +10,7 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Table(name = "tb_Categoria")
+@Table(name = "tb_categoria")
 public class Categoria implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -19,6 +20,8 @@ public class Categoria implements Serializable {
     private Long id;
     private String descricao;
 
+    @JsonIgnore
+    @ManyToMany(mappedBy = "categorias")
     private Set<Produto> produtos = new HashSet<>();
 
     // Construtor

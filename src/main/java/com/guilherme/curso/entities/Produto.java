@@ -9,7 +9,7 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Table(name = "tb_Produto")
+@Table(name = "tb_produto")
 public class Produto implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -22,6 +22,9 @@ public class Produto implements Serializable {
     private Double preco;
     private String imgUrl;
 
+    @ManyToMany
+    @JoinTable(name = "tb_produto_categoria",
+            joinColumns = @JoinColumn(name = "produto_id"), inverseJoinColumns = @JoinColumn(name = "categoria_id"))
     private Set<Categoria> categorias = new HashSet<>();
 
     // Construtor
@@ -96,12 +99,6 @@ public class Produto implements Serializable {
 
     @Override
     public String toString() {
-        return "Produto{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", descricao='" + descricao + '\'' +
-                ", preco=" + preco +
-                ", imgUrl='" + imgUrl + '\'' +
-                '}';
+        return "Produto{" + "id=" + id + ", nome='" + nome + '\'' + ", descricao='" + descricao + '\'' + ", preco=" + preco + ", imgUrl='" + imgUrl + '\'' + '}';
     }
 }

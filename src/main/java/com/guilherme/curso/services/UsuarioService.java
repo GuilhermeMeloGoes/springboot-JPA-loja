@@ -3,7 +3,6 @@ package com.guilherme.curso.services;
 import com.guilherme.curso.entities.Usuario;
 import com.guilherme.curso.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
