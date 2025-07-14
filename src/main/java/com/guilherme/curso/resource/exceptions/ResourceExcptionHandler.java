@@ -1,5 +1,6 @@
 package com.guilherme.curso.resource.exceptions;
 
+import com.guilherme.curso.services.exceptions.DatabaseException;
 import com.guilherme.curso.services.exceptions.ResourceNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
@@ -17,6 +18,18 @@ public class ResourceExcptionHandler extends RuntimeException {
 
         String error = "Rescurso não encontrado!";
         HttpStatus status = HttpStatus.NOT_FOUND;
+
+        StandardError err = new StandardError(Instant.now(), status.value(), error, e.getMessage(), request.getRequestURI());
+
+        return ResponseEntity.status(status).body(err);
+
+    }
+
+    @ExceptionHandler(DatabaseException.class)
+    public ResponseEntity<StandardError> dataBase(DatabaseException e, HttpServletRequest request) {
+
+        String error = "DataBase erro!";
+        HttpStatus status = HttpStatus.BAD_REQUEST;
 
         StandardError err = new StandardError(Instant.now(), status.value(), error, e.getMessage(), request.getRequestURI());
 
