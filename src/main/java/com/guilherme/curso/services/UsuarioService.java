@@ -4,6 +4,7 @@ import com.guilherme.curso.entities.Usuario;
 import com.guilherme.curso.repositories.UsuarioRepository;
 import com.guilherme.curso.services.exceptions.DatabaseException;
 import com.guilherme.curso.services.exceptions.ResourceNotFoundException;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -33,9 +34,13 @@ public class UsuarioService {
     }
 
     public Usuario update(Long id, Usuario usuario) {
-        Usuario entidade = repository.getReferenceById(id);
-        updateData(entidade, usuario);
-        return repository.save(entidade);
+        try {
+            Usuario entidade = repository.getReferenceById(id);
+            updateData(entidade, usuario);
+            return repository.save(entidade);
+        } catch (EntityNotFoundException e) {
+            throw new ResourceNotFoundException(id);
+        }
     }
 
     private void updateData(Usuario entidade, Usuario usuario) {
