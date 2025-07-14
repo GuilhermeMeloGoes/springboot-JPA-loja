@@ -1,5 +1,6 @@
 package com.guilherme.curso.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jdk.jfr.Enabled;
 
@@ -18,6 +19,7 @@ public class Pagamento implements Serializable {
     private Long id;
     private Instant dataPagamento;
 
+    @JsonIgnore
     @OneToOne
     @MapsId
     private Pedido pedido;

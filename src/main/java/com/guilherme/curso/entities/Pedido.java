@@ -94,6 +94,16 @@ public class Pedido implements Serializable {
     }
 
     // Métodos
+
+    public Double getValorTotal() {
+        double total = 0.0;
+        for (PedidoItem p : items) {
+            total += p.getSubTotal();
+        }
+        return total;
+    }
+
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
